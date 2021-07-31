@@ -58,6 +58,21 @@
 
 /* akhir section */
 
+/* text masuk */
+.p-hilang,
+.btn-hilang {
+  opacity: 0;
+  transform: translate(-50px, 0) rotate(15deg);
+  transition: 1s;
+}
+
+.p-muncul,
+.btn-muncul {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+/* text masuk */
+
 /* model */
 .model {
   height: 560px;
