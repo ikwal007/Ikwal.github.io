@@ -5,7 +5,9 @@ import React from 'react';
 
 const Index = () => {
     return (
-        <GuestLayout children={<PortofolioView />} />
+        <GuestLayout >
+            <PortofolioView />
+        </GuestLayout>
     );
 }
 

@@ -5,7 +5,11 @@ import React from "react";
 
 const Index = () => {
   const router = useRouter();
-  return <GuestLayout children={<AllPostView slug={router.query.slug?.[0]} />} />;
+  return (
+    <GuestLayout>
+      <AllPostView slug={router.query.slug?.[0]} />
+    </GuestLayout>
+  );
 };
 
 export default Index;
