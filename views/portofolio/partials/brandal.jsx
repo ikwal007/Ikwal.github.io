@@ -40,7 +40,7 @@ const Brandal = () => {
 
             <img
               className="relative inset-0 mx-auto w-[70%] xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
-              src="http://localhost:3000/model3.png"
+              src="/model3.png"
               alt=""
             />
           </div>

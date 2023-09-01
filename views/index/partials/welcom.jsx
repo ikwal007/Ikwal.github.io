@@ -56,7 +56,7 @@ const Welcom = () => {
               <div>
                 <img
                   className="w-full hidden lg:flex"
-                  src="http://localhost:3000/bg1.jpg"
+                  src="/bg1.jpg"
                   alt=""
                 />
               </div>

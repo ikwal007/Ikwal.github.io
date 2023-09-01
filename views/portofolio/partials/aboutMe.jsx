@@ -18,7 +18,7 @@ const AboutMe = () => {
           <div>
             <img
               className="w-full mx-auto sm:max-w-xs rounded-xl"
-              src="http://localhost:3000/model1.jpg"
+              src="model1.jpg"
               alt=""
             />
           </div>
