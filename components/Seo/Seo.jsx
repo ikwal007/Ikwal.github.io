@@ -4,7 +4,7 @@ import React from 'react'
 const Seo = () => {
     return (
         <Head>
-            <title>Ikwal's Blog & Portofolio - Programmer Web Developer</title>
+            <title>Ikwal Blog & Portofolio - Programmer Web Developer</title>
             <meta
                 name="description"
                 content="Selamat datang di blog pribadi dan portofolio Muhammad Ikwal Ramadhan. Temukan artikel informatif tentang pemrograman, bahasa PHP, JavaScript, dan proyek-proyek pengembangan web yang saya kerjakan."
