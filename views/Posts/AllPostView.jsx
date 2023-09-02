@@ -3,10 +3,10 @@ import Welcom from './Partials/Welcom';
 import LatesPost from './Partials/LatesPost';
 import Recomandation from './Partials/Recomandation';
 
-const AllPostView = ({slug}) => {
+const AllPostView = ({category}) => {
     return (
         <>
-           <Welcom slug={slug} />
+           <Welcom category={category} />
            <LatesPost /> 
            <Recomandation />
         </>

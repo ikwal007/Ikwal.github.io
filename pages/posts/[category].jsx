@@ -3,13 +3,13 @@ import AllPostView from "@/views/Posts/AllPostView";
 import { useRouter } from "next/router";
 import React from "react";
 
-const Index = () => {
+const PostsPage = () => {
   const router = useRouter();
   return (
     <GuestLayout>
-      <AllPostView slug={router.query.slug?.[0]} />
+      <AllPostView category={router.query.category?.[0]} />
     </GuestLayout>
   );
 };
 
-export default Index;
+export default PostsPage;

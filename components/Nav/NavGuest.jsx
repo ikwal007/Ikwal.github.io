@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 const NavGuest = () => {
   const router = useRouter();
-  console.log(router);
   return (
     <>
       <header className="navbar bg-base-100 bg-opacity-30">
