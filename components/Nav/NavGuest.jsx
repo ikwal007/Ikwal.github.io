@@ -1,12 +1,15 @@
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/react";
+import { FaUserCircle } from "react-icons/fa";
 
 const NavGuest = () => {
   const router = useRouter();
+  const { data } = useSession();
   return (
     <>
-      <header className="navbar bg-base-100 bg-opacity-30">
+      <header className="navbar bg-base-100 bg-opacity-30 space-x-1">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -42,33 +45,17 @@ const NavGuest = () => {
                 </Link>
               </li>
               <li>
-                <a>Posts</a>
-                <ul className="p-2">
-                  <li>
-                    <Link
-                      className={
-                        router.asPath === "/posts/php"
-                          ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
-                          : null
-                      }
-                      href={"/posts/php"}
-                    >
-                      Php
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={
-                        router.asPath === "/posts/javascript"
-                          ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
-                          : null
-                      }
-                      href={"/posts/javascript"}
-                    >
-                      JavaScript
-                    </Link>
-                  </li>
-                </ul>
+                <Link
+                  className={
+                    router.route === "/artikel" ||
+                    router.route.startsWith("/artikel/detail-post/")
+                      ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
+                      : null
+                  }
+                  href={"/artikel"}
+                >
+                  Artikel
+                </Link>
               </li>
               <li>
                 <Link
@@ -84,12 +71,12 @@ const NavGuest = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">
+          <h1 className="btn btn-ghost normal-case text-xl w-full lg:w-auto">
             Muhammad Ikwal Ramadhan
-          </a>
+          </h1>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 gap-2">
             <li>
               <Link
                 className={
@@ -102,36 +89,18 @@ const NavGuest = () => {
                 Home
               </Link>
             </li>
-            <li tabIndex={0}>
-              <details>
-                <summary>Post</summary>
-                <ul className="p-2">
-                  <li>
-                    <Link
-                      className={
-                        router.asPath === "/posts/php"
-                          ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
-                          : null
-                      }
-                      href={"/posts/php"}
-                    >
-                      Php
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={
-                        router.asPath === "/posts/javascript"
-                          ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
-                          : null
-                      }
-                      href={"/posts/javascript"}
-                    >
-                      JavaScript
-                    </Link>
-                  </li>
-                </ul>
-              </details>
+            <li>
+              <Link
+                className={
+                  router.route === "/artikel" ||
+                  router.route.startsWith("/artikel/detail-post/*")
+                    ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
+                    : null
+                }
+                href={"/artikel"}
+              >
+                Artikel
+              </Link>
             </li>
             <li>
               <Link
@@ -147,7 +116,34 @@ const NavGuest = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end"></div>
+        <div className="navbar-end">
+          {data && (
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <FaUserCircle className="w-10 h-10" />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <Link href={"/admin/upload-post"}>Upload Post</Link>
+                </li>
+                <li>
+                  <button onClick={() => signOut()}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </header>
     </>
   );

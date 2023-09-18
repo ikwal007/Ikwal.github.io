@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React from "react";
+import { BsArrowRightCircle } from "react-icons/bs";
 
 const Welcom = () => {
   return (
@@ -18,38 +20,25 @@ const Welcom = () => {
                   Kembangkan karir Anda dengan cepat dengan mentor yang tepat.
                 </p>
 
-                <a
-                  href="#"
+                <Link
+                  href="/auth/signup"
                   title=""
                   className="inline-flex items-center px-6 py-4 mt-8 font-semibold text-black transition-all duration-200 bg-yellow-300 rounded-full lg:mt-16 hover:bg-yellow-400 focus:bg-yellow-400"
                   role="button"
                 >
                   Join for free
-                  <svg
-                    className="w-6 h-6 ml-8 -mr-2"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </a>
+                  <BsArrowRightCircle className="ml-3 w-6 h-6" />
+                </Link>
 
                 <p className="mt-5 text-gray-600">
                   Already joined us?{" "}
-                  <a
-                    href="#"
+                  <Link
+                    href="/auth/signin"
                     title=""
                     className="text-black transition-all duration-200 hover:underline"
                   >
                     Log in
-                  </a>
+                  </Link>
                 </p>
               </div>
 

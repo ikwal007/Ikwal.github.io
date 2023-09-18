@@ -2,11 +2,12 @@ import React from "react";
 import Welcom from "./partials/welcom";
 import LatestPosts from "./partials/LatestPosts";
 
-const IndexView = () => {
+
+const IndexView = ({lastPost}) => {
   return (
     <>
       <Welcom />
-      <LatestPosts />
+      <LatestPosts lastPost={lastPost} />
     </>
   );
 };
