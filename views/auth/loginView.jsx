@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Hero from "./partials/Hero";
+import Hero from "@/views/auth/partials/hero";
 import { FaFingerprint } from "react-icons/fa";
 import { BsAt } from "react-icons/bs";
 import { signIn } from "next-auth/react";

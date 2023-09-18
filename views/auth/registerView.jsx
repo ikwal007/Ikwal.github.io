@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Hero from "./partials/Hero";
+import Hero from "@/views/auth/partials/hero";
 import { BsAt } from "react-icons/bs";
 import { FaFingerprint, FaRegUser } from "react-icons/fa";
 import axios from "axios";
