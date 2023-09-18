@@ -1,7 +1,6 @@
 import React from "react";
 
 const CardPostV1 = (data) => {
-    // cosnt {}
   return (
     <div className="overflow-hidden bg-white rounded shadow">
       <div className="p-5">
