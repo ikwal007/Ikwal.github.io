@@ -24,7 +24,6 @@ export async function getServerSideProps() {
 }
 
 export default function Home({lastPost}) {
-  console.log(lastPost);
   return (
     <GuestLayout>
       <IndexView lastPost={lastPost.data} />

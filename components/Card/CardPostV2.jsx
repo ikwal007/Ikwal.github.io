@@ -1,16 +1,19 @@
 import formattedDate from "@/utils/dateFormater";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const CardPostV2 = ({ data }) => {
-  const { title, createdAt, content, category, id } = data;
+  const { title, createdAt, content, category, slug, thumbnailUrl } = data;
   const newDate = formattedDate(createdAt);
   return (
     <div>
       <div className="block aspect-w-4 aspect-h-3">
-        <img
+        <Image
           className="object-cover w-full h-full"
-          src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/1/blog-post-1.jpg"
+          height={400}
+          width={600}
+          src={thumbnailUrl}
           alt="tumbnail"
         />
       </div>
@@ -18,7 +21,7 @@ const CardPostV2 = ({ data }) => {
         {category}
       </span>
       <p className="mt-6 text-xl font-semibold">
-        <Link href="#" title="" className="text-black">
+        <Link href={`/artikel/detail/${slug}`} className="text-black">
           {title}
         </Link>
       </p>
@@ -27,7 +30,6 @@ const CardPostV2 = ({ data }) => {
       </p>
       <div className="h-0 mt-6 mb-4 border-t-2 border-gray-200 border-dashed"></div>
       <span className="block text-sm font-bold tracking-widest text-gray-500 uppercase">
-        {" "}
         Muhammad Ikwal Ramadhan . {newDate}
       </span>
     </div>

@@ -92,7 +92,7 @@ const LatesPost = ({
                         >
                           <img
                             className="object-cover w-full h-full"
-                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-1.jpg"
+                            src={post.thumbnailUrl}
                             alt=""
                           />
                         </a>

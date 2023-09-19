@@ -93,7 +93,7 @@ const NavGuest = () => {
               <Link
                 className={
                   router.route === "/artikel" ||
-                  router.route.startsWith("/artikel/detail-post/*")
+                  router.route.startsWith("/artikel/detail-post/")
                     ? `bg-yellow-300 hover:bg-yellow-400 focus:bg-yellow-400`
                     : null
                 }

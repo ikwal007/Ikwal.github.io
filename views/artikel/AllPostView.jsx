@@ -10,7 +10,7 @@ const AllPostView = ({ category, lastestPost, rekomendasiForYou, nextPagination,
       <Welcom  />
       <Category category={category} />
       <LatesPost lastestPost={lastestPost} nextPagination={nextPagination} prevPagination={prevPagination} page={page} loading={loading} />
-      <Recomandation rekomendasiForYou={rekomendasiForYou} />
+      <Recomandation rekomendasiForYou={lastestPost} />
     </>
   );
 };
