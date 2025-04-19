@@ -1,5 +1,4 @@
-import DataToolsProps from "@/cardToolsProps";
-import CardTools from "@/components/organisms/cardTools";
+"use client";
 import { FaCss3Alt } from "react-icons/fa";
 import {
   IoLogoGithub,
@@ -9,6 +8,9 @@ import {
   IoLogoReact,
 } from "react-icons/io5";
 import { SiPhp, SiTailwindcss } from "react-icons/si";
+import type DataToolsProps from "@/cardToolsProps";
+import CardTools from "@/components/organisms/cardTools";
+import Link from "next/link";
 
 export const DataTools: DataToolsProps[] = [
   {
@@ -61,24 +63,52 @@ export const DataTools: DataToolsProps[] = [
   },
 ];
 
-export default function Tools() {
+export default function AllCategorys() {
+  const renderArticles = () => {
+    // if (loading) {
+    //   return (
+    //     <>
+    //       <CardArticleSkeleton />
+    //       <CardArticleSkeleton />
+    //       <CardArticleSkeleton />
+    //     </>
+    //   );
+    // }
+
+    // if (!posts?.data?.length) {
+    //   return <p className="text-gray-500">{posts.message}</p>;
+    // }
+
+    return DataTools.map((data, index) => (
+      <Link
+        key={index}
+        href={`/article/category/${data.name.toString().toLowerCase()}`}
+      >
+        <CardTools icon={data.icon} name={data.name} />
+      </Link>
+    ));
+  };
+
+  //   console.log(posts);
+
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-            Alat-alat yang saya kuasai
-          </h2>
-          <p className="max-w-md mx-auto mt-4 text-base leading-relaxed text-gray-600">
-            Peralatan yang saya gunakan dalam sehari-hari dalam project
-          </p>
+        <div className="flex items-end justify-between">
+          <div className="flex-1 text-center lg:text-left">
+            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
+              Artikel Terbaru
+            </h2>
+            <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">
+              Artikel terbaru yang saya tulis
+            </p>
+            <div className="grid max-w-md text-center grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-4 lg:max-w-full">
+              {renderArticles()}
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 mt-8 text-center sm:mt-16 lg:mt-20 sm:grid-cols-4 gap-y-8 lg:grid-cols-4 gap-x-0">
-          {DataTools.map((data, index) => (
-            <CardTools key={index} {...data} />
-          ))}
-        </div>
+        <div className="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full"></div>
       </div>
     </section>
   );
