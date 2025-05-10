@@ -51,10 +51,10 @@ export default function BigHero() {
             />
 
             <Image
+              src="/img/model3.png"
               className="relative inset-0 mx-auto w-[70%] xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
               width={600}
               height={400}
-              src="img/model3.png"
               alt=""
             />
           </div>

@@ -32,7 +32,7 @@ export default function CardArticle({
       <div className="p-5">
         <div className="relative">
           <Link
-            href={`/artikel/detail-post/${slug}`}
+            href={`/article/detail-post/${slug}`}
             title={title}
             className="block"
           >

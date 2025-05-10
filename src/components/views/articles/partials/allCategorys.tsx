@@ -97,10 +97,10 @@ export default function AllCategorys() {
         <div className="flex items-end justify-between">
           <div className="flex-1 text-center lg:text-left">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-              Artikel Terbaru
+              Semua Kategori Artikel
             </h2>
             <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">
-              Artikel terbaru yang saya tulis
+              Semua kategori artikel yang saya tulis
             </p>
             <div className="grid max-w-md text-center grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-4 lg:max-w-full">
               {renderArticles()}
