@@ -6,6 +6,9 @@
  *
  * @returns {React.ReactElement} - The big hero element.
  */
+
+import Image from "next/image";
+
 /******  6d91d1f5-3c76-40d9-84cd-6d99fc047c88  *******/
 export default function BigHero() {
   return (
@@ -39,14 +42,18 @@ export default function BigHero() {
           </div>
 
           <div className="relative ">
-            <img
+            <Image
               className="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
+              width={600}
+              height={400}
               src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
               alt=""
             />
 
-            <img
+            <Image
               className="relative inset-0 mx-auto w-[70%] xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-110"
+              width={600}
+              height={400}
               src="img/model3.png"
               alt=""
             />

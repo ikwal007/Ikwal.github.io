@@ -4,6 +4,9 @@
  *
  * @return {React.ReactElement} The component
  */
+
+import Image from "next/image";
+
 /******  f08d0047-4ea2-4b49-ad6d-6e46e3c25008  *******/
 export default function AboutMe() {
   return (
@@ -21,8 +24,10 @@ export default function AboutMe() {
 
         <div className="grid grid-cols-1 mt-8 md:mt-20 gap-y-6 md:grid-cols-2 gap-x-10">
           <div>
-            <img
+            <Image
               className="w-full mx-auto sm:max-w-xs rounded-xl"
+              width={600}
+              height={400}
               src="img/model1.jpg"
               alt=""
             />

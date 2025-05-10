@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRightCircle } from "react-icons/bs";
 
@@ -41,8 +42,10 @@ export default function NewArticle() {
             </div>
 
             <div>
-              <img
+              <Image
                 className="w-full hidden lg:flex"
+                width={600}
+                height={400}
                 src="/img/bg1.jpg"
                 alt=""
               />
