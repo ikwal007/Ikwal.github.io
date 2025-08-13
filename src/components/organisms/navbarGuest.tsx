@@ -1,11 +1,19 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
 import { FaHome } from "react-icons/fa";
-import { IoCloseOutline } from "react-icons/io5";
 import { RiArticleFill } from "react-icons/ri";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { JSX } from "react/jsx-runtime";
+import Link from "next/link";
+import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 interface Data {
   name: string;
@@ -26,37 +34,204 @@ export const Data: Data[] = [
   },
 ];
 
-export default function NavbarGuest() {
-  const [Show, setShow] = useState(false);
-  return (
-    <nav className="flex w-full justify-between items-center px-6 py-4 z-50">
-      <div className="text-lg font-semibold">Muhammad Ikwal Ramadhan</div>
+const components: { title: string; href: string; description: string }[] = [
+  {
+    title: "Alert Dialog",
+    href: "/docs/primitives/alert-dialog",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
+  },
+  {
+    title: "Hover Card",
+    href: "/docs/primitives/hover-card",
+    description:
+      "For sighted users to preview content available behind a link.",
+  },
+  {
+    title: "Progress",
+    href: "/docs/primitives/progress",
+    description:
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+  },
+  {
+    title: "Scroll-area",
+    href: "/docs/primitives/scroll-area",
+    description: "Visually or semantically separates content.",
+  },
+  {
+    title: "Tabs",
+    href: "/docs/primitives/tabs",
+    description:
+      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+  },
+  {
+    title: "Tooltip",
+    href: "/docs/primitives/tooltip",
+    description:
+      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+  },
+];
 
-      <div>
-        {!Show ? (
-          <button onClick={() => setShow(!Show)}>
-            <RxHamburgerMenu className="w-6 h-6 hover:cursor-pointer" />
-          </button>
-        ) : (
-          <div className="fixed z-[999] top-0 right-0 w-full h-screen flex flex-col bg-white">
-            <div className="flex justify-end py-4 px-6">
-              <IoCloseOutline
-                className="w-6 h-6 hover:cursor-pointer"
-                onClick={() => setShow(!Show)}
-              />
-            </div>
-            <ul className="flex-1 gap-4 py-4 px-6 overflow-y-auto touch-pan-y">
-              {Data.map((data, index) => (
-                <li className="w-max px-4 py-2" key={index}>
-                  <Link className="flex gap-4 text-2xl" href={data.href}>
-                    {data.icon} {data.name}
-                  </Link>
+export default function NavigationGuest() {
+  return (
+    <div className="flex w-full justify-center px-2 py-4">
+      <NavigationMenu viewport={false}>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Home</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <a
+                      className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
+                      href="/"
+                    >
+                      <div className="mt-4 mb-2 text-lg font-medium">
+                        shadcn/ui
+                      </div>
+                      <p className="text-muted-foreground text-sm leading-tight">
+                        Beautifully designed components built with Tailwind CSS.
+                      </p>
+                    </a>
+                  </NavigationMenuLink>
                 </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    </nav>
+                <ListItem href="/docs" title="Introduction">
+                  Re-usable components built using Radix UI and Tailwind CSS.
+                </ListItem>
+                <ListItem href="/docs/installation" title="Installation">
+                  How to install dependencies and structure your app.
+                </ListItem>
+                <ListItem href="/docs/primitives/typography" title="Typography">
+                  Styles for headings, paragraphs, lists...etc
+                </ListItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                {components.map((component) => (
+                  <ListItem
+                    key={component.title}
+                    title={component.title}
+                    href={component.href}
+                  >
+                    {component.description}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+            >
+              <Link href="/docs">Docs</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>List</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[300px] gap-4">
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="#">
+                      <div className="font-medium">Components</div>
+                      <div className="text-muted-foreground">
+                        Browse all components in the library.
+                      </div>
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="#">
+                      <div className="font-medium">Documentation</div>
+                      <div className="text-muted-foreground">
+                        Learn how to use the library.
+                      </div>
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="#">
+                      <div className="font-medium">Blog</div>
+                      <div className="text-muted-foreground">
+                        Read our latest blog posts.
+                      </div>
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Simple</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[200px] gap-4">
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="#">Components</Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="#">Documentation</Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="#">Blocks</Link>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[200px] gap-4">
+                <li>
+                  <NavigationMenuLink asChild>
+                    <Link href="#" className="flex-row items-center gap-2">
+                      <CircleHelpIcon />
+                      Backlog
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="#" className="flex-row items-center gap-2">
+                      <CircleIcon />
+                      To Do
+                    </Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink asChild>
+                    <Link href="#" className="flex-row items-center gap-2">
+                      <CircleCheckIcon />
+                      Done
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </div>
+  );
+}
+
+function ListItem({
+  title,
+  children,
+  href,
+  ...props
+}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
+  return (
+    <li {...props}>
+      <NavigationMenuLink asChild>
+        <Link href={href}>
+          <div className="text-sm leading-none font-medium">{title}</div>
+          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+            {children}
+          </p>
+        </Link>
+      </NavigationMenuLink>
+    </li>
   );
 }

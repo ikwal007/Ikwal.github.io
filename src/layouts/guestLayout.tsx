@@ -1,5 +1,5 @@
 import FooterGuest from "@/components/organisms/footerGuest";
-import NavbarGuest from "@/components/organisms/navbarGuest";
+import { NavBar2 } from "@/components/ui/Navbar2";
 import React from "react";
 
 export default function GuestLayout({
@@ -7,7 +7,9 @@ export default function GuestLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <NavbarGuest />
+      <div className="flex w-full py-10">
+        <NavBar2 />
+      </div>
       {children}
       <FooterGuest />
     </>
