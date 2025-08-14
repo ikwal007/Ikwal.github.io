@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 
 import {
@@ -21,7 +20,6 @@ import {
 
 import {
   LayoutDashboard,
-  Users,
   MenuIcon,
   BookOpen,
   MessageCircle,
@@ -29,6 +27,8 @@ import {
   Phone,
   CircleUser,
   Newspaper,
+  Wrench,
+  ClipboardClock,
 } from "lucide-react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -126,20 +126,26 @@ const mainMenu: MenuItem[] = [
     ],
   },
   {
-    title: "About Us",
+    title: "About",
     url: "/about",
     subMenu: [
       {
-        title: "Our Story",
-        url: "/about/story",
-        description: "Learn about our mission and values.",
+        title: "About Me",
+        url: "/#about",
+        description: "About me and my background.",
         icon: <BookOpen />,
       },
       {
-        title: "Team",
-        url: "/about/team",
-        description: "Meet the people behind our success.",
-        icon: <Users />,
+        title: "Tools and Technologies",
+        url: "/#tools",
+        description: "Tools that I master.",
+        icon: <Wrench />,
+      },
+      {
+        title: "Experience",
+        url: "/#experience",
+        description: "My experience in programming.",
+        icon: <ClipboardClock />,
       },
     ],
   },
@@ -263,6 +269,7 @@ export function NavBar2<T extends MenuItem>(navBar2Props: NavBar2Props<T>) {
     }
 
     //Otherwise if it is a simple menu then use the NavigationMenuLink tag
+
     return (
       <NavigationMenuLink asChild>
         <Link href={menuItem.url}>{menuItem.title}</Link>
@@ -531,8 +538,6 @@ function ListItem({
   href,
   ...props
 }: ListItemProps) {
-  console.log(icon);
-
   return (
     <li {...props}>
       {/* The entire content is clickable, so Link should wrap the main section */}
