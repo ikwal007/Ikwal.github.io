@@ -1,32 +1,144 @@
-import Link from "next/link";
-import { IoLogoGithub, IoLogoInstagram } from "react-icons/io5";
+import { Heart } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import {
+  FaInstagram,
+  FaYoutube,
+  FaFacebook,
+  FaTwitter,
+  FaLinkedin,
+} from "react-icons/fa";
+import { IconType } from "react-icons/lib";
 
-export default function FooterGuest() {
-  return (
-    <footer className="grid grid-flow-row lg:grid-flow-col lg:grid-cols-2 gap-4 p-10 bg-gray-900 text-gray-300 text-md">
-      <div className="flex flex-col gap-2">
-        <svg
-          width="50"
-          height="50"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          className="fill-current"
-        >
-          <path d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path>
-        </svg>
-        <p>Muhammad Ikwal Ramadhan.</p>
+interface SocialLink {
+  href: string;
+  icon: IconType;
+}
+
+interface FooterNavigation {
+  [key: string]: { label: string; href: string }[];
+}
+
+const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
+  { href: "#", icon: FaInstagram },
+  { href: "#", icon: FaYoutube },
+  { href: "#", icon: FaFacebook },
+  { href: "#", icon: FaTwitter },
+  { href: "#", icon: FaLinkedin },
+];
+
+const DEFAULT_FOOTER_NAVIGATION: FooterNavigation = {
+  Solutions: [
+    { label: "Summary", href: "#" },
+    { label: "Plans", href: "#" },
+    { label: "Store", href: "#" },
+    { label: "Capabilities", href: "#" },
+  ],
+  Organization: [
+    { label: "Profile", href: "#" },
+    { label: "Members", href: "#" },
+    { label: "News", href: "#" },
+    { label: "Jobs", href: "#" },
+  ],
+};
+
+interface Footer1Props {
+  sectionId?: string;
+  website?: string;
+  websiteDescription?: string;
+  handle?: string;
+  classname?: string;
+  socialLinks?: SocialLink[];
+  footerNavigation?: FooterNavigation;
+}
+
+export default function Footer1({
+  sectionId = "",
+  website = "Muhammad Ikwal Ramadhan",
+  websiteDescription = " This is my portfolio website to showcase what i do",
+  handle = "ikwal_coder",
+  classname,
+  footerNavigation = DEFAULT_FOOTER_NAVIGATION,
+  socialLinks = DEFAULT_SOCIAL_LINKS,
+}: Footer1Props) {
+  // LEFT SECTION
+  function LeftSection() {
+    return (
+      <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+        <div className="mb-4 font-semibold text-2xl">{website}</div>
+        <p className="text-muted-foreground mb-4 text-sm sm:text-base max-w-md">
+          {websiteDescription}
+        </p>
+        <div className="flex items-center space-x-4 text-muted-foreground">
+          {socialLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.href}
+              className="hover:opacity-75 transition-opacity duration-200"
+              aria-label={`Social link ${index + 1}`}
+            >
+              <link.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+            </a>
+          ))}
+        </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <span className="font-bold text-xl">Social</span>
-        <div className="flex gap-4">
-          <Link href={"https://www.instagram.com/ikwal_coder"}>
-            <IoLogoInstagram className="w-8 h-8" />
-          </Link>
-          <Link href={"https://github.com/ikwal007"}>
-            <IoLogoGithub className="w-8 h-8" />
-          </Link>
+    );
+  }
+
+  function RightSection() {
+    return (
+      <div className="w-full lg:w-1/2 ">
+        <div className="flex flex-wrap gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
+          {Object.entries(footerNavigation).map(([title, links]) => (
+            <div key={title} className="min-w-0">
+              <div className="mb-4 font-semibold text-md sm:text-lg">
+                {title}
+              </div>
+              <ul className="space-y-2 text-muted-foreground">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="hover:underline text-sm sm:text-base transition-all duration-200 hover:text-foreground"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  //MAIN JSX
+  return (
+    <footer
+      id={sectionId}
+      className={`w-full py-6 sm:py-8 lg:py-12 flex flex-col gap-4 text-sm
+      px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 mt-10 ${classname || ""}`}
+    >
+      {/* Main content section */}
+      <div className="flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-12 mb-6 sm:mb-8 lg:mb-10">
+        <LeftSection />
+        <RightSection />
+      </div>
+
+      {/* Separator */}
+      <Separator className="h-[1px] my-4" />
+
+      {/* Bottom section */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4 text-xs sm:text-sm">
+        <div className="text-center sm:text-left">
+          <span className="font-semibold opacity-60">{website}</span>
+          <span className="ml-1">&copy; All rights reserved.</span>
+        </div>
+        <div className="flex items-center gap-1 text-center sm:text-right">
+          <span>Made with</span>
+          <Heart className="text-red-500 h-4 w-4 fill-current mx-1" />
+          <span>by</span>
+          <span className="font-semibold ml-1">@{handle}</span>
         </div>
       </div>
     </footer>

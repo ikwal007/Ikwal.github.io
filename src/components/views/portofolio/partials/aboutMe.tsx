@@ -28,7 +28,7 @@ export default function AboutMe() {
               className="w-full mx-auto sm:max-w-xs rounded-xl"
               width={600}
               height={400}
-              src="/img/model1.jpg"
+              src="/img/model4.jpeg"
               alt=""
             />
           </div>
