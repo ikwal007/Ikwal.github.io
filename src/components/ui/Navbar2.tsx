@@ -119,7 +119,7 @@ const mainMenu: MenuItem[] = [
       },
       {
         title: "Categories",
-        url: "/products/categories",
+        url: "/article#allCategories",
         description: "Explore by product type.",
         icon: <LayoutDashboard />,
       },
