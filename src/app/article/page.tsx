@@ -1,13 +1,13 @@
 import Articles from "@/components/views/articles/articles";
-import { PostProvider } from "@/contexts/postContext";
+import { ArticleProvider } from "@/contexts/articleContext";
 import GuestLayout from "@/layouts/guestLayout";
 
 export default async function page() {
   return (
     <GuestLayout>
-      <PostProvider>
+      <ArticleProvider>
         <Articles />
-      </PostProvider>
+      </ArticleProvider>
     </GuestLayout>
   );
 }

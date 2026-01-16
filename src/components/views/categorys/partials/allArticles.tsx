@@ -2,7 +2,7 @@
 
 import CardArticle from "@/components/organisms/cardArticle";
 import CardArticleSkeleton from "@/components/organisms/cardArticleSkeleton";
-import { usePost } from "@/contexts/postContext";
+import { usePost } from "@/contexts/articleContext";
 
 export default function AllArticles() {
   const { posts, loading } = usePost();

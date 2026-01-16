@@ -1,11 +1,10 @@
 "use client";
-
 import CardArticle from "@/components/organisms/cardArticle";
 import CardArticleSkeleton from "@/components/organisms/cardArticleSkeleton";
-import { usePost } from "@/contexts/postContext";
+import { useArticle } from "@/contexts/articleContext";
 
 export default function AllArticles() {
-  const { posts, loading } = usePost();
+  const { articles, loading } = useArticle();
 
   const renderArticles = () => {
     if (loading) {
@@ -18,11 +17,11 @@ export default function AllArticles() {
       );
     }
 
-    if (!posts?.data?.length) {
-      return <p className="text-gray-500">{posts.message}</p>;
+    if (!articles?.length) {
+      return <p className="text-gray-500">{articles.message}</p>;
     }
 
-    return posts.data.map((data) => (
+    return articles.map((data) => (
       <CardArticle
         key={data.id}
         id={data.id}
@@ -37,8 +36,6 @@ export default function AllArticles() {
       />
     ));
   };
-
-  console.log(posts);
 
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">

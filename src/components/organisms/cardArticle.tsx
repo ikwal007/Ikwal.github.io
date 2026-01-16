@@ -1,71 +1,73 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineRight } from "react-icons/ai";
-import { getBadgeTheme } from "@/getBadgeTheme";
 import Badge from "../atoms/badge";
+import { getBadgeTheme } from "@/getBadgeTheme";
+import type { ArticleTypeWithCategory } from "@/types/ArticleTypeWithCategory";
 
-interface CardProps {
-  id: string;
-  title: string;
-  slug: string;
-  img: string;
-  date: string;
-  category: string[];
-  excerpt: string;
-  content: string;
-  creator: string;
-}
+type Props = {
+  article: ArticleTypeWithCategory;
+};
 
-export default function CardArticle({
-  id,
-  title,
-  slug,
-  img,
-  date,
-  category,
-  excerpt,
-  content,
-  creator,
-}: CardProps) {
+/**
+ * CardArticle
+ *
+ * Presentational component for displaying article summary.
+ * Assumes article.category is included from Prisma query.
+ */
+export default function CardArticle({ article }: Props) {
+  const { slug, articleTitle, imgUrl, category, createdAt } = article;
+
   return (
     <div className="overflow-hidden bg-white rounded shadow">
       <div className="p-5">
+        {/* Image */}
         <div className="relative">
           <Link
             href={`/article/detail-post/${slug}`}
-            title={title}
+            title={articleTitle}
             className="block"
           >
             <Image
-              className="object-cover w-full h-full"
-              src={img}
+              className="object-cover w-full h-[240px]"
+              src={imgUrl}
               width={600}
               height={400}
-              alt=""
+              alt={articleTitle}
             />
           </Link>
 
-          <div className="absolute top-4 left-4 gap-2 flex">
-            {category.map((item, index) => (
-              <Link key={index} href={`/artikel/category/${item}`} title={item}>
-                <Badge data={item} theme={getBadgeTheme(item)} />
+          {/* Category Badge */}
+          {category && (
+            <div className="absolute top-4 left-4 flex gap-2">
+              <Link
+                href={`/article/category/${category.slug}`}
+                title={category.name}
+              >
+                <Badge
+                  data={category.name}
+                  theme={getBadgeTheme(category.slug)}
+                />
               </Link>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
+
+        {/* Meta */}
         <span className="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
-          {date}
+          {new Date(createdAt).toLocaleDateString("id-ID")}
         </span>
-        <p className="mt-5 text-2xl font-semibold">{title}</p>
-        <p className="mt-4 text-base text-gray-600">{creator}</p>
-        <p className="mt-4 text-base text-gray-600">{excerpt}</p>
+
+        {/* Title */}
+        <p className="mt-5 text-2xl font-semibold">{articleTitle}</p>
+
+        {/* Read more */}
         <Link
-          href={`/artikel/detail-post/${slug}`}
-          title={title}
-          className="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+          href={`/article/detail-post/${slug}`}
+          className="inline-flex items-center mt-5 text-base font-semibold text-blue-600 border-b-2 border-transparent hover:border-blue-600"
         >
-          Baca Lebih lanjut
-          <AiOutlineRight />
+          Baca lebih lanjut
+          <AiOutlineRight className="ml-1" />
         </Link>
       </div>
     </div>

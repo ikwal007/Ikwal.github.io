@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                String              @id @default(uuid()) @db.Uuid()
+  avatar            String?             @db.VarChar(255)
+  name              String              @db.VarChar(100)
+  email             String              @unique @db.VarChar(254)
+  password          String              @db.VarChar(255)
+  token             String?             @db.VarChar(100)
+  isVerified        Boolean             @default(false)
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime            @updatedAt @map("updated_at")
+  roleId            String?             @map("role_id") @db.Uuid()
+  // relationship with Role model
+  role              Role?               @relation(fields: [roleId], references: [id])
+  VerificationToken VerificationToken[]
+
+  @@map("users")
+}
+
+enum TokenType {
+  EMAIL_VERIFICATION
+  RESET_PASSWORD
+}
+
+model VerificationToken {
+  id        String    @id @default(uuid()) @db.Uuid()
+  userId    String    @map("user_id") @db.Uuid()
+  token     String    @unique
+  type      TokenType
+  createdAt DateTime  @default(now()) @map("created_at")
+  expiresAt DateTime
+  // relationship with User model
+  User      User?     @relation(fields: [userId], references: [id])
+
+  @@map("verification_tokens")
+}
+
+model Role {
+  id        String   @id @default(uuid()) @db.Uuid()
+  name      String   @db.VarChar()
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  // relationship with User model
+  users     User[]
+
+  @@map("roles")
+}
+
+model Category {
+  id        String   @id @default(uuid()) @db.Uuid()
+  name      String   @db.VarChar(100)
+  slug      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // relationship with Article model
+  articles Article[]
+
+  @@map("categories")
+}
+
+model Article {
+  id           String   @id @default(uuid()) @db.Uuid()
+  articleTitle String   @db.VarChar(255)
+  imgUrl       String   @map("img_url") @db.VarChar(255)
+  contentJson  Json
+  contentHtml  String
+  slug         String   @unique @db.VarChar(255)
+  categoryId   String   @map("category_id") @db.Uuid()
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  // relationship with Category model
+  category     Category @relation(fields: [categoryId], references: [id])
+
+  @@map("articles")
+}
+
+model SocialMedia {
+  id        String   @id @default(uuid()) @db.Uuid()
+  platform  String   @db.VarChar(100)
+  url       String   @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("social_media")
+}

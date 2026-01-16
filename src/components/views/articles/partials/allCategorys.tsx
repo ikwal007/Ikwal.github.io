@@ -11,6 +11,9 @@ import { SiPhp, SiTailwindcss } from "react-icons/si";
 import type DataToolsProps from "@/cardToolsProps";
 import CardTools from "@/components/organisms/cardTools";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import type { Article } from "@prisma/client";
+import { fetchDataPagination } from "@/lib/fetchDataPagination";
 
 export const DataTools: DataToolsProps[] = [
   {
@@ -64,6 +67,14 @@ export const DataTools: DataToolsProps[] = [
 ];
 
 export default function AllCategorys() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const res = await fetchDataPagination<Article>("/api/article");
+      setArticles(res.data);
+    };
+    fetchArticles();
+  }, []);
   const renderArticles = () => {
     // if (loading) {
     //   return (
@@ -78,6 +89,8 @@ export default function AllCategorys() {
     // if (!posts?.data?.length) {
     //   return <p className="text-gray-500">{posts.message}</p>;
     // }
+
+    console.log(articles);
 
     return DataTools.map((data, index) => (
       <Link

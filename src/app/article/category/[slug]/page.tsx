@@ -1,5 +1,5 @@
 import Categorys from "@/components/views/categorys/categorys";
-import { PostProvider } from "@/contexts/postContext";
+import { PostProvider } from "@/contexts/articleContext";
 import GuestLayout from "@/layouts/guestLayout";
 
 export default async function page({ params }: { params: Promise<any> }) {
