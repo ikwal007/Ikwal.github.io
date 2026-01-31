@@ -6,6 +6,8 @@ import { useArticle } from "@/contexts/articleContext";
 export default function AllArticles() {
   const { articles, loading } = useArticle();
 
+  console.log("allArticles : ", articles);
+
   const renderArticles = () => {
     if (loading) {
       return (
@@ -17,23 +19,12 @@ export default function AllArticles() {
       );
     }
 
-    if (!articles?.length) {
-      return <p className="text-gray-500">{articles.message}</p>;
+    if (!articles?.data?.data.length) {
+      return <p className="text-gray-500">{articles?.message}</p>;
     }
 
-    return articles.map((data) => (
-      <CardArticle
-        key={data.id}
-        id={data.id}
-        title={data.title}
-        slug={data.slug}
-        img={data.img}
-        date={data.date}
-        category={data.category}
-        excerpt={data.excerpt}
-        content={data.content}
-        creator={data.creator}
-      />
+    return articles?.data.data.map((article) => (
+      <CardArticle key={article.id} {...article} />
     ));
   };
 

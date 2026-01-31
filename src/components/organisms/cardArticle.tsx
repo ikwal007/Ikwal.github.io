@@ -5,17 +5,15 @@ import Badge from "../atoms/badge";
 import { getBadgeTheme } from "@/getBadgeTheme";
 import type { ArticleTypeWithCategory } from "@/types/ArticleTypeWithCategory";
 
-type Props = {
-  article: ArticleTypeWithCategory;
-};
-
 /**
  * CardArticle
  *
  * Presentational component for displaying article summary.
  * Assumes article.category is included from Prisma query.
  */
-export default function CardArticle({ article }: Props) {
+export default function CardArticle(article: ArticleTypeWithCategory) {
+  console.log(article);
+
   const { slug, articleTitle, imgUrl, category, createdAt } = article;
 
   return (
@@ -29,7 +27,7 @@ export default function CardArticle({ article }: Props) {
             className="block"
           >
             <Image
-              className="object-cover w-full h-[240px]"
+              className="object-cover w-full h-60"
               src={imgUrl}
               width={600}
               height={400}
